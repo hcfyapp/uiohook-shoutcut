@@ -2,7 +2,6 @@
   "name": "@hcfy/uiohook-shortcut",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "author": "mica <me@limingkai.cn>",
   "license": "MIT",
   "files": [
     "dist"

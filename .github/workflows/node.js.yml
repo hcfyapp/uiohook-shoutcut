@@ -11,12 +11,18 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os:
+          - name: Ubuntu
+            version: latest
+          - name: macOS
+            version: latest
 
     # 特地加个名称的原因见下方链接
     # https://stackoverflow.com/questions/68554735/github-action-status-check-missing-from-the-list-of-checks-in-protected-branch-s
-    name: 运行 Jest 测试
-
-    runs-on: ubuntu-latest
+    name: 在 ${{ matrix.os.name }} 上运行测试
+    runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
     steps:
     - uses: actions/checkout@v3

@@ -17,9 +17,7 @@ const KeyMap: Record<string, number | number[] | null | undefined> = {
   alt: Alt,
   option: isMacOS ? Alt : null,
   get altgr(): never {
-    throw new Error(
-      'Sorry, I don\'t know which key "AltGr" in Electron stands for in libUIOHook.'
-    )
+    throw new Error('libUIOHook doesn\'t support "AltGr" key.')
   },
   shift: Shift,
   super: Meta,
@@ -96,9 +94,7 @@ const KeyMap: Record<string, number | number[] | null | undefined> = {
   '.': UiohookKey.Period,
   '/': UiohookKey.Slash,
   get plus(): never {
-    throw new Error(
-      'Sorry, I don\'t know which key "Plus" in Electron stands for in libUIOHook.'
-    )
+    throw new Error('libUIOHook doesn\'t support "Plus" key.')
   },
   space: UiohookKey.Space,
   tab: UiohookKey.Tab,
@@ -160,9 +156,7 @@ export function convertAccelerator(accelerator: string) {
   const codes = accelerator.split('+').map((key) => {
     const code = KeyMap[key.toLowerCase()]
     if (code === undefined) {
-      throw new Error(
-        'libUIOHook does not seem to support this key in Electron: ' + key
-      )
+      throw new Error(`${key} is not a valid Electron accelerator.`)
     }
     return code
   })
@@ -180,8 +174,7 @@ export function isAcceleratorEqual(keycodeList: number[], accelerator: string) {
   if (!codes) return false
   if (codes.length !== keycodeList.length) return false
   return codes.every((code, index) => {
-    return Array.isArray(code)
-      ? code.includes(keycodeList[index])
-      : code === keycodeList[index]
+    const keycode = keycodeList[index]
+    return Array.isArray(code) ? code.includes(keycode) : code === keycode
   })
 }

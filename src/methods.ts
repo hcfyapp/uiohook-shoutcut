@@ -1,11 +1,11 @@
 import { shortcuts } from './shortcuts'
 import { convertAccelerator } from './map'
 
+const noop = () => {}
+
 export function register(accelerator: string, callback: () => void) {
   const codes = convertAccelerator(accelerator)
-  if (codes) {
-    shortcuts.set(accelerator.toLowerCase(), callback)
-  }
+  shortcuts.set(accelerator.toLowerCase(), codes ? callback : noop)
   return true
 }
 

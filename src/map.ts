@@ -1,4 +1,5 @@
 import { UiohookKey } from 'uiohook-napi'
+import { normalizeKey } from './normalize'
 
 const isMacOS = process.platform === 'darwin'
 
@@ -9,11 +10,9 @@ const Shift = [UiohookKey.Shift, UiohookKey.ShiftRight]
 
 const KeyMap: Record<string, number | number[] | null | undefined> = {
   command: isMacOS ? Meta : null,
-  cmd: isMacOS ? Meta : null,
   control: Ctrl,
   ctrl: Ctrl,
   commandorcontrol: isMacOS ? Meta : Ctrl,
-  cmdorctrl: isMacOS ? Meta : Ctrl,
   alt: Alt,
   option: isMacOS ? Alt : null,
   get altgr(): never {
@@ -154,7 +153,7 @@ const KeyMap: Record<string, number | number[] | null | undefined> = {
  */
 export function convertAccelerator(accelerator: string) {
   const codes = accelerator.split('+').map((key) => {
-    const code = KeyMap[key.toLowerCase()]
+    const code = KeyMap[normalizeKey(key)]
     if (code === undefined) {
       throw new Error(`${key} is not a valid Electron accelerator.`)
     }

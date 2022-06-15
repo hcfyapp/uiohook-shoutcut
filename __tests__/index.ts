@@ -8,6 +8,7 @@ import {
 import { uIOhook, UiohookKey } from 'uiohook-napi'
 const isMacOS = process.platform === 'darwin'
 const cb = jest.fn()
+const cb2 = jest.fn()
 
 function triggerKey(keycode: number, auto = true) {
   uIOhook.emit('keydown', { keycode })
@@ -125,4 +126,25 @@ test('registerAll 能为多个快捷键注册同一个 callback', () => {
   triggerKey(UiohookKey.A)
   triggerKey(UiohookKey.B)
   expect(cb).toHaveBeenCalledTimes(2)
+})
+
+describe('短写的快捷键会被视为同一个', function () {
+  test('触发快捷键时，只会触发最后注册的 callback', () => {
+    register('CommandOrControl+C', cb)
+    register('CmdOrCtrl+C', cb2)
+    triggerKeys([isMacOS ? UiohookKey.Meta : UiohookKey.Ctrl, UiohookKey.C])
+    expect(cb).toHaveBeenCalledTimes(0)
+    expect(cb2).toHaveBeenCalledTimes(1)
+  })
+
+  test('注册其中一个时，另一个也会被认为是已注册', () => {
+    register('CommandOrControl+C', cb)
+    expect(isRegistered('CmdOrCtrl+C')).toBe(true)
+  })
+
+  test('取消注册其中一个时，另一个也会被认为取消了', () => {
+    register('CommandOrControl+C', cb)
+    unregister('CmdOrCtrl+C')
+    expect(isRegistered('CommandOrControl+C')).toBe(false)
+  })
 })

@@ -1,11 +1,12 @@
 import { shortcuts } from './shortcuts'
 import { convertAccelerator } from './map'
+import { normalizeAccelerator } from './normalize'
 
 const noop = () => {}
 
 export function register(accelerator: string, callback: () => void) {
   const codes = convertAccelerator(accelerator)
-  shortcuts.set(accelerator.toLowerCase(), codes ? callback : noop)
+  shortcuts.set(normalizeAccelerator(accelerator), codes ? callback : noop)
   return true
 }
 
@@ -16,11 +17,11 @@ export function registerAll(accelerators: string[], callback: () => void) {
 }
 
 export function isRegistered(accelerator: string) {
-  return shortcuts.has(accelerator.toLowerCase())
+  return shortcuts.has(normalizeAccelerator(accelerator))
 }
 
 export function unregister(accelerator: string) {
-  shortcuts.delete(accelerator.toLowerCase())
+  shortcuts.delete(normalizeAccelerator(accelerator))
 }
 
 export function unregisterAll() {

@@ -32,6 +32,8 @@
     "typescript": "^4.7.3"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest",
+    "test:ci": "jest --ci --maxWorkers=2"
   }
 }

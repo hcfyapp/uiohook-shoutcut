@@ -1,0 +1,36 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: 跑测试
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    # 特地加个名称的原因见下方链接
+    # https://stackoverflow.com/questions/68554735/github-action-status-check-missing-from-the-list-of-checks-in-protected-branch-s
+    name: 运行 Jest 测试
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    # GitHub Actions 是在国外，指定国内的镜像源反而会慢
+    #- run: rm .npmrc
+    - name: Node.js 版本
+      uses: actions/setup-node@v3
+      with:
+        cache: 'yarn'
+    - name: 将 Jest 的缓存文件 cache 住
+      uses: actions/cache@v3
+      with:
+        # 这个目录定义在 jest.config.js 中
+        path: .jest-cache
+        key: ${{ runner.os }}-jest
+    - run: yarn
+    - run: yarn test:ci

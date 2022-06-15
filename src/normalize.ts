@@ -1,6 +1,10 @@
 const ShortMap: Record<string, string | undefined> = {
   cmd: 'command',
+  ctrl: 'control',
   cmdorctrl: 'commandorcontrol',
+  esc: 'escape',
+  enter: 'return',
+  super: 'meta',
 }
 
 /**

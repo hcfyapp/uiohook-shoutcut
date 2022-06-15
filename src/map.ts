@@ -11,7 +11,6 @@ const Shift = [UiohookKey.Shift, UiohookKey.ShiftRight]
 const KeyMap: Record<string, number | number[] | null | undefined> = {
   command: isMacOS ? Meta : null,
   control: Ctrl,
-  ctrl: Ctrl,
   commandorcontrol: isMacOS ? Meta : Ctrl,
   alt: Alt,
   option: isMacOS ? Alt : null,
@@ -19,7 +18,6 @@ const KeyMap: Record<string, number | number[] | null | undefined> = {
     throw new Error('libUIOHook doesn\'t support "AltGr" key.')
   },
   shift: Shift,
-  super: Meta,
   meta: Meta,
   '0': UiohookKey['0'],
   '1': UiohookKey['1'],
@@ -106,7 +104,6 @@ const KeyMap: Record<string, number | number[] | null | undefined> = {
   delete: UiohookKey.Delete,
   insert: UiohookKey.Insert,
   return: UiohookKey.Enter,
-  enter: UiohookKey.Enter,
   up: UiohookKey.ArrowUp,
   down: UiohookKey.ArrowDown,
   left: UiohookKey.ArrowLeft,
@@ -116,7 +113,6 @@ const KeyMap: Record<string, number | number[] | null | undefined> = {
   pageup: UiohookKey.PageUp,
   pagedown: UiohookKey.PageDown,
   escape: UiohookKey.Escape,
-  esc: UiohookKey.Escape,
   // https://github.com/kwhat/libuiohook/blob/1.2.2/include/uiohook.h#L314-L316
   volumeup: 0xe030,
   volumedown: 0xe02e,

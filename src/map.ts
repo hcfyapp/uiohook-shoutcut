@@ -142,7 +142,7 @@ const KeyMap: Record<string, number | number[] | null | undefined> = {
   numadd: UiohookKey.NumpadAdd,
   numsub: UiohookKey.NumpadSubtract,
   nummult: UiohookKey.NumpadMultiply,
-  mumdiv: UiohookKey.NumpadDivide,
+  numdiv: UiohookKey.NumpadDivide,
 }
 
 /**

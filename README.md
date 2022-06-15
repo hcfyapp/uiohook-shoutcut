@@ -19,7 +19,7 @@ Then replace Electron's `gobalShortcut` to `@hcfy/uiohook-shoutcut`:
 ```js
 import { globalShortcut } from 'electron'
 // replace to
-import globalShortcut from '@hcfy/uiohook-shoutcut'
+import * as globalShortcut from '@hcfy/uiohook-shoutcut'
 ```
 
 Done.

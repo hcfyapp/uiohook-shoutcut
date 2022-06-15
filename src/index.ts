@@ -1,2 +1,10 @@
 import './listen'
-export * from './methods'
+import {
+  register,
+  registerAll,
+  isRegistered,
+  unregister,
+  unregisterAll,
+} from './methods'
+
+export { register, registerAll, isRegistered, unregister, unregisterAll }

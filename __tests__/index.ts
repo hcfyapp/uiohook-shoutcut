@@ -40,6 +40,10 @@ function triggerKeys(keycodes: number[], auto = true) {
   return release
 }
 
+afterEach(function () {
+  unregisterAll()
+})
+
 test('如果注册 Electron 不支持的键会报错', () => {
   expect(() => {
     register('no_this_key', cb)

@@ -1,8 +1,22 @@
 {
   "name": "@hcfy/uiohook-shortcut",
   "version": "0.0.1",
-  "main": "dist/index.js",
+  "description": "A Electron's globalShortcut replacement based on uiohook-napi.",
+  "keywords": [
+    "electron",
+    "keyboard",
+    "shortcut",
+    "iohook",
+    "uiohook",
+    "libuiohook"
+  ],
+  "homepage": "https://github.com/hcfyapp/uiohook-shoutcut",
+  "bugs": {
+    "url": "https://github.com/hcfyapp/uiohook-shoutcut/issues"
+  },
   "license": "MIT",
+  "repository": "github:hcfyapp/uiohook-shoutcut",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
